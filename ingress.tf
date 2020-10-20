@@ -1,13 +1,13 @@
 resource "kubernetes_namespace" "fruits-catalog" {
   metadata {
-    name = "${var.fruits_namespace}"
+    name = var.fruits_namespace
   }
 }
 
 resource "kubernetes_ingress" "fruits-catalog" {
   metadata {
     name      = "fruits-catalog-ingress"
-    namespace = "${var.fruits_namespace}"
+    namespace = var.fruits_namespace
 
     labels = {
       app = "fruits-catalog"
@@ -22,7 +22,7 @@ resource "kubernetes_ingress" "fruits-catalog" {
     tls {
       hosts = ["fruits.testlab.local"]
 
-      secret_name = "${var.name}"
+      secret_name = var.name
     }
 
     rule {

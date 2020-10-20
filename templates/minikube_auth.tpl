@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e 
+set -euxo
 
 export VAULT_SA_NAME=$(kubectl get sa ${service_account} -n default -o jsonpath="{.secrets[*]['name']}")
 export SA_JWT_TOKEN=$(kubectl get secret $VAULT_SA_NAME -n default -o jsonpath="{.data.token}" | base64 --decode; echo)
